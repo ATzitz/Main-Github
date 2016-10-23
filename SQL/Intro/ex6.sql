@@ -1,0 +1,1 @@
+SELECT AVG (Grade),Fname,Lname from (stud inner join marks on stud.StID =marks.StID) group by Fname;
