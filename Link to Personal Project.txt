@@ -11,6 +11,6 @@ The main functionality of the website is
  to provide a way for handling any issues
 -An error page was also created 
 
-The website uses as index the contact page.
+The website uses the contact page as index.
 
 http://83.212.100.122:8080/PersonalProject/

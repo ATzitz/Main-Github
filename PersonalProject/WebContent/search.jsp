@@ -49,7 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img alt="Brand"
+				<a class="navbar-brand" href="index.jsp"><img alt="Brand"
 					src="images/bookcamp.png" width=190 height=35></a>
 			</div>
 
@@ -57,18 +57,22 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="index.jsp">Home <span
+							class="sr-only">(current)</span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Categories <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<%List<QueryCat> catdao = (List<QueryCat>) request.getAttribute("catdao");
+							<%
+								List<QueryCat> catdao = (List<QueryCat>) request.getAttribute("catdao");
 								for (int i = 0; catdao.size() > i; i++) {
 
 									String dropcat = catdao.get(i).getBookcategory();
 							%>
 							<li><a href="#"><%=dropcat%></a></li>
-							<%}	%>
+							<%
+								}
+							%>
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -283,18 +287,29 @@
 	<!-- SEARCH END -->
 
 
-	 <footer>
-          <div class="col-sm-12" align=center >
-      
-       		<table align=center width=60%>
-          <tr><td align=center width=20%><a href="error.jsp">Sample error page</a><td align=center width=20%><a href="index.jsp">Contact</a><td align=center width=20%><a href="error.jsp">Top 250</a></td></tr>
-           <tr></tr>
-           <tr><td></td><td align=center width=60%><img src="favicon.ico"> © 2015 <a href="index.jsp">Bookcamp.we.rock</a>. All rights reserved.</td></tr>
-            </table>
-                
-        </div>
-      
-        </footer>
+	<footer>
+		<div class="col-sm-12" align=center>
+
+			<table align=center width=60%>
+				<tr>
+					<td align=center width=20%><a href="error.jsp">Sample
+							error page</a>
+					<td align=center width=20%><a href="index.jsp">Contact</a>
+					<td align=center width=20%><a href="error.jsp">Top 10(in
+							dev)</a></td>
+				</tr>
+				<tr>
+				<tr>
+					<td></td>
+					<td align=center width=60%><img src="favicon.ico"> ©
+						2015 <a href="index.jsp">Bookcamp.we.rock</a>. All rights
+						reserved.</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</footer>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

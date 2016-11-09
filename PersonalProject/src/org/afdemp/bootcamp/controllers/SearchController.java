@@ -22,7 +22,7 @@ public class SearchController extends HttpServlet {
 
 	public SearchController() {
 		super();
-		}
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -46,42 +46,42 @@ public class SearchController extends HttpServlet {
 		QueryDAO catdao = new QueryDAO();
 
 		try {
-			
+
 			catdao.open();					// open connection
-			
+
 
 			List<QueryCat> categories = catdao.getcategories();  	 // Execute query
-			
+
 			request.setAttribute("catdao", categories); 							// set attribute to be accessible for jsp
 
 			catdao.close();						// close connection
-			
-			
 
-			
+
+
+
 		} catch (Exception e) {
 			response.getWriter().append("ERROR ACCESSING THE DATABASE");  // PRINT ERROR MESSAGE
 			errodis.forward(request, response);
 			e.printStackTrace();
 		} 
-		
-		
+
+
 
 		try {
 			qdao.open();					// open connection
-			
+
 
 			List<QueryCat> qdaojsp = qdao.getQuery(searchby, keyword,rating);  	 // Execute query
 			request.setAttribute("qdao", qdaojsp); 							// set attribute to be accessible for jsp
 
 			qdao.close();						// close connection
-			
+
 
 
 			request.setAttribute("queryobj", queryobj);		// forward the search parameters
 			succdis.forward(request, response); 			//forward to search page showing resukts
 
-			
+
 
 			return;	
 		} catch (Exception e) {
@@ -93,85 +93,85 @@ public class SearchController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String delarg = request.getParameter("delarg");
-		
-		
+
+
 
 		if (delarg==null){
 
-		
-
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-
-		String bookid=request.getParameter("addtowish");
-		String bookimage=request.getParameter("addedbookimage");
-		
-		request.setAttribute("bookadd", bookid);
-		request.setAttribute("addedbookimage", bookimage);
-
-		
-		String userid= "10"; // WIll be extracted when the log in page is ready( Method to be used is session) 
-
-		QueryDAO indao= new QueryDAO();
 
 
+			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
 
-		try {
+			String bookid=request.getParameter("addtowish");
+			String bookimage=request.getParameter("addedbookimage");
 
-
-			indao.open();
-
-			int userid_int=Integer.valueOf(userid);
-			int bookid_int=Integer.valueOf(bookid);
-
-			indao.addwishlist(userid_int,bookid_int);
-
-			
-			indao.close();
-			request.getRequestDispatcher("wishadd.jsp").forward(request, response);
-
-		} catch (SQLException AlreadyAdded) {
-			// TODO Auto-generated catch block
-			AlreadyAdded.printStackTrace();
-		}
-		
-
-	}
-	
-	else{
-
-		String userid= "10"; // WIll be extracted when the log in page is ready( Method to be used is session) 
-		
-		String bookid=request.getParameter("delarg");
-		String bookimageremov=request.getParameter("removedbook");
-
-		request.setAttribute("removedbook", bookimageremov);
-		QueryDAO outdao= new QueryDAO();
-		
-		try {
+			request.setAttribute("bookadd", bookid);
+			request.setAttribute("addedbookimage", bookimage);
 
 
-			outdao.open();
+			String userid= "10"; // WIll be extracted when the log in page is ready( Method to be used is session) 
 
-			int userid_int=Integer.valueOf(userid);
-			int bookid_int=Integer.valueOf(bookid);
+			QueryDAO indao= new QueryDAO();
 
-			outdao.remfromwish(userid_int,bookid_int);
 
-			
 
-			outdao.close();
-			request.getRequestDispatcher("removed.jsp").forward(request, response);
+			try {
 
-		} catch (SQLException AlreadyAdded) {
-			// TODO Auto-generated catch block
-			AlreadyAdded.printStackTrace();
+
+				indao.open();
+
+				int userid_int=Integer.valueOf(userid);
+				int bookid_int=Integer.valueOf(bookid);
+
+				indao.addwishlist(userid_int,bookid_int);
+
+
+				indao.close();
+				request.getRequestDispatcher("wishadd.jsp").forward(request, response);
+
+			} catch (SQLException AlreadyAdded) {
+				// TODO Auto-generated catch block
+				AlreadyAdded.printStackTrace();
+			}
+
+
 		}
 
-		
-		
-	}
+		else{
 
-}
+			String userid= "10"; // WIll be extracted when the log in page is ready( Method to be used is session) 
+
+			String bookid=request.getParameter("delarg");
+			String bookimageremov=request.getParameter("removedbook");
+
+			request.setAttribute("removedbook", bookimageremov);
+			QueryDAO outdao= new QueryDAO();
+
+			try {
+
+
+				outdao.open();
+
+				int userid_int=Integer.valueOf(userid);
+				int bookid_int=Integer.valueOf(bookid);
+
+				outdao.remfromwish(userid_int,bookid_int);
+
+
+
+				outdao.close();
+				request.getRequestDispatcher("removed.jsp").forward(request, response);
+
+			} catch (SQLException AlreadyAdded) {
+				// TODO Auto-generated catch block
+				AlreadyAdded.printStackTrace();
+			}
+
+
+
+		}
+
+	}
 }
 
